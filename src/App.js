@@ -9,7 +9,9 @@ const App = () => {
   const [result, setResult] = useState(null);
 
   const findIp = async () => {
-    const res = await fetch(`http://ip-api.com/json/${ip}`);
+    const res = await fetch(
+      `https://geo.ipify.org/api/v2/country,city?apiKey=at_D2pCes2PoBBZgaRp8j2skWe941tLW&ipAddress=${ip}`
+    );
     const data = await res.json();
     setResult(data);
   };
@@ -49,25 +51,25 @@ const App = () => {
             <table className="w-full  table  ">
               <tr>
                 <td className="">IP ADDRESS</td>
-                <td>{result?.query}</td>
+                <td>{result?.ip}</td>
               </tr>
               <tr>
                 <td> LOCATION</td>
                 <td>
-                  {result?.city} , {result?.regionName}{" "}
+                  {result?.location.city},{result?.location.region}
                 </td>
               </tr>
               <tr>
                 <td> TIMEZONE</td>
-                <td>{result?.timezone}</td>
+                <td>{result?.location.timezone}</td>
               </tr>
               <tr>
                 <td> ISP</td>
                 <td>{result?.isp}</td>
               </tr>
               <tr>
-                <td> Zip Code</td>
-                <td>{result?.zip}</td>
+                <td> Routes</td>
+                <td>{result?.as.route}</td>
               </tr>
             </table>
             <div className=" flex justify-end absolute w-full bottom-0 pr-8">
